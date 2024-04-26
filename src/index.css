@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --label-color: #57534e;
+    --label-disabled-color: #9ca3af;
+    --label-strong-color: #1c1917;
+    --color-allowlist: #19aa76;
+    --color-watchlist: #f9b83e;
+    --color-denylist: #c75c5c;
+
+    --color-primary-rgb-900: 16 42 116;
+    --color-primary-rgb-800: 30 59 138;
+    --color-primary-rgb-700: 38 69 150;
+    --color-primary-rgb-600: 48 78 162;
+    --color-primary-rgb-500: 54 86 172;
+    --color-primary-rgb-400: 87 111 183;
+    --color-primary-rgb-300: 117 137 195;
+    --color-primary-rgb-200: 156 170 213;
+    --color-primary-rgb-100: 195 203 230;
+    --color-primary-rgb-50: 231 235 245;
+
+    --operations-item-hover-background: #f1f1f1;
+    /* --operations-direction-bg: url('/src/assets/relationship_direction_bg.png');
+		--operations-direction-bg-last: url('/src/assets/relationship_direction_bg_last.png'); */
+  }
+
+  html[class='dark'] {
+    --label-color: #d1d5db;
+    --label-disabled-color: #6b7280;
+    --label-strong-color: #f3f4f6;
+
+    --color-primary-rgb-900: 138 109 30;
+    --color-primary-rgb-800: 171 146 38;
+    --color-primary-rgb-700: 191 168 43;
+    --color-primary-rgb-600: 211 189 49;
+    --color-primary-rgb-500: 226 206 53;
+    --color-primary-rgb-400: 231 123 83;
+    --color-primary-rgb-300: 236 220 113;
+    --color-primary-rgb-200: 243 230 152;
+    --color-primary-rgb-100: 248 239 193;
+    --color-primary-rgb-50: 252 249 230;
+
+    --operations-item-hover-background: #25252e;
+
+    /* --operations-direction-bg: url('/src/assets/relationship_direction_bg_dark.png');
+		--operations-direction-bg-last: url('/src/assets//relationship_direction_bg_last_dark.png'); */
+  }
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  width: 100vw;
+  height: 100vh;
+
+  /* tailwind css syntax */
+  @apply flex flex-col items-center;
+  @apply bg-gray-50 text-gray-700;
+}
+/* @apply bg-zinc-900 text-gray-50; */
+
+#root {
+  /* width full but has max width */
+  @apply w-full max-w-screen-2xl;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+form input,
+form select {
+  @apply p-4 border border-gray-300 rounded-md;
+}
+form button {
+  @apply p-4 bg-brand rounded-md text-white font-bold hover:opacity-80;
+}
+
+li {
+  list-style: none;
+}
