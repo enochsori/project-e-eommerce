@@ -2,21 +2,13 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { GrUserAdmin } from 'react-icons/gr';
 import { RiShoppingCartLine } from 'react-icons/ri';
-import { login, logout, onUserStateChange } from '../apis/firebase';
-import { useEffect, useState } from 'react';
-import { User } from 'firebase/auth';
+
 import UserComponent from './UserComponent';
+import { useAuthContext } from '../context/AuthContext';
 
 export default function Navbar() {
   const navigate = useNavigate();
-  const [user, setUser] = useState<User | null>(null);
-
-  useEffect(() => {
-    onUserStateChange((user) => {
-      console.log(user);
-      setUser(user);
-    });
-  }, []);
+  const { user, login, logout } = useAuthContext();
 
   return (
     <header className='w-full flex justify-between items-center p-4 mb-4 text-2xl border-b border-gray-300'>

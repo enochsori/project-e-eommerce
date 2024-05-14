@@ -8,6 +8,7 @@ import Home from './pages/Home.tsx';
 import NotFound from './pages/NotFound.tsx';
 import Cart from './pages/Cart.tsx';
 import Products from './pages/Products.tsx';
+import ProtectedRoute from './pages/ProtectedRoute.tsx';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,14 @@ const router = createBrowserRouter([
         path: '/:category',
         element: <Products />,
       },
+      // {
+      //   path: '/new-product',
+      //   element: (
+      //     <ProtectedRoute requiredAdmin={true}>
+      //       <NewProduct />
+      //     </ProtectedRoute>
+      //   ),
+      // },
     ],
   },
 ]);
