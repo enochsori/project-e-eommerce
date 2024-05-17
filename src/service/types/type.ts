@@ -26,4 +26,5 @@ export type NewProduct = {
   price: number;
   category: string;
   description: string;
+  sort: string;
 };

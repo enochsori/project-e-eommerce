@@ -1,10 +1,11 @@
 import { ChangeEvent, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { uploadImage } from '../apis/uploader';
 import { addNewProduct } from '../apis/firebase';
+import { NewProductFormData } from '../service/types/type';
 
 export default function NewProduct() {
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset } = useForm<NewProductFormData>();
   const [file, setFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const [success, setSuccess] = useState<string | null>(null);
@@ -22,7 +23,9 @@ export default function NewProduct() {
     setFile(event.target.files && event.target.files[0]);
   };
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit: SubmitHandler<NewProductFormData> = async (
+    data: NewProductFormData
+  ) => {
     // 1. image - upload into cloud and get url where the image saved in
     setIsUploading(true);
     file &&
