@@ -66,13 +66,16 @@ body {
 }
 /* @apply bg-zinc-900 text-gray-50; */
 
+body::-webkit-scrollbar {
+  display: none;
+}
+
 #root {
   /* width full but has max width */
   @apply w-full max-w-screen-2xl;
 }
-
-body::-webkit-scrollbar {
-  display: none;
+li {
+  list-style: none;
 }
 
 form input,
@@ -81,8 +84,4 @@ form select {
 }
 form button {
   @apply p-4 bg-brand rounded-md text-white font-bold hover:opacity-80;
-}
-
-li {
-  list-style: none;
 }

@@ -22,6 +22,12 @@ export default function Navbar() {
           <span className='text-lg'>All Products</span>
         </Link>
 
+        {user && user.isAdmin && (
+          <Link to='/new-product' className='hover:opacity-60'>
+            <GrUserAdmin />
+          </Link>
+        )}
+
         {user && (
           <div className='flex'>
             <UserComponent user={user} />

@@ -6,8 +6,9 @@ import {
   signOut,
   onAuthStateChanged,
 } from 'firebase/auth';
+import { getDatabase, ref, get, set } from 'firebase/database';
 
-import { getDatabase, ref, get } from 'firebase/database';
+import { v4 as uuid } from 'uuid';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -16,6 +17,7 @@ const firebaseConfig = {
   projectId: import.meta.env.VITE_PROJECT_ID,
 };
 import { User } from 'firebase/auth';
+import { ExtendedUser } from '../service/types/type';
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -38,20 +40,38 @@ export const logout = () => {
 
 export const onUserStateChange = (callback: (user: User | null) => void) => {
   onAuthStateChanged(auth, async (user) => {
-    const updatedUser: User | null = user ? await adminUser(user) : user;
+    const updatedUser: ExtendedUser | null = user
+      ? await adminUser(user)
+      : null;
     callback(updatedUser);
   });
 };
 
-const adminUser = async (user: User): Promise<User> => {
+// Check is admin? () => return isAdmin:true | false
+const adminUser = async (user: User): Promise<ExtendedUser> => {
   return get(ref(database, 'admins'))
     .then((snapshot) => {
       if (snapshot.exists()) {
         const admin = snapshot.val();
         const isAdmin: boolean = admin.includes(user.uid);
+        // return isAdmin:true
         return { ...user, isAdmin };
       }
-      return;
+      // if there's error or problem return just user
+      return user;
     })
     .catch(console.error);
+};
+
+export const addNewProduct = async (product: {}, imgURL: string) => {
+  // make a product id via uuid
+  const id = uuid();
+
+  // upload a new product into the firebase database
+  set(ref(database, `products/${id}`), {
+    ...product,
+    id,
+    image: imgURL,
+    price: parseInt(product.price),
+  });
 };

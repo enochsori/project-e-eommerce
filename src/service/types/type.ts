@@ -1,3 +1,5 @@
+import { User } from 'firebase/auth';
+
 type Categories =
   | 'Acoustic Guitar'
   | 'Bass Guitar'
@@ -14,3 +16,14 @@ export type Item = {
 };
 
 export type ItemCategories = { [key: string]: Item };
+
+export interface ExtendedUser extends User {
+  isAdmin?: string;
+}
+
+export type NewProduct = {
+  name: string;
+  price: number;
+  category: string;
+  description: string;
+};

@@ -6,10 +6,10 @@ import {
   useState,
 } from 'react';
 import { login, logout, onUserStateChange } from '../apis/firebase';
-import { User } from 'firebase/auth';
+import { ExtendedUser } from '../service/types/type';
 
 type AuthContextValue = {
-  user: User | null;
+  user: ExtendedUser | null;
   login: () => void;
   logout: () => void;
 };
@@ -24,7 +24,7 @@ const AuthContext = createContext<AuthContextValue>({
 });
 
 export default function AuthContextProvider({ children }: ContextProviderPops) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<ExtendedUser | null>(null);
 
   useEffect(() => {
     onUserStateChange((user) => {
