@@ -21,10 +21,15 @@ export interface ExtendedUser extends User {
   isAdmin?: string;
 }
 
-export type NewProduct = {
+export type NewProductFormData = {
   name: string;
   price: number;
   category: string;
   description: string;
   sort: string;
+};
+
+export type ProductType = NewProductFormData & {
+  id: string;
+  image: string;
 };

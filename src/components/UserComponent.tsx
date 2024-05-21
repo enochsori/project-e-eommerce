@@ -7,8 +7,6 @@ type Props = {
 export default function UserComponent({
   user: { photoURL, displayName },
 }: Props) {
-  console.log(photoURL);
-
   return (
     <div className='flex items-center '>
       <img

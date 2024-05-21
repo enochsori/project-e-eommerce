@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 
-export default function Products() {
+export default function Category() {
   const {
     state: {
       category: { item, imageSrc },
@@ -16,7 +16,7 @@ export default function Products() {
           className='rounded-full h-10 w-10 object-cover'
         />
         <h1 className='text-2xl font-bold'>
-          {item ? item : 'Comming soom..'}
+          {item ? item : 'Comming soon..'}
           {/* <span className='text-brand'> Muzik</span> */}
         </h1>
       </section>

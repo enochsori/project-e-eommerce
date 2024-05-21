@@ -6,6 +6,9 @@ export default {
       colors: {
         brand: '#F96162',
       },
+      backgroundImage: {
+        banner: `url('/images/banner-img.jpg')`,
+      },
     },
   },
   plugins: [],

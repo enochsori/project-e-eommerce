@@ -17,7 +17,11 @@ const firebaseConfig = {
   projectId: import.meta.env.VITE_PROJECT_ID,
 };
 import { User } from 'firebase/auth';
-import { ExtendedUser } from '../service/types/type';
+import {
+  ExtendedUser,
+  NewProductFormData,
+  ProductType,
+} from '../service/types/type';
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -63,7 +67,10 @@ const adminUser = async (user: User): Promise<ExtendedUser> => {
     .catch(console.error);
 };
 
-export const addNewProduct = async (product: {}, imgURL: string) => {
+export const addNewProduct = async (
+  product: NewProductFormData,
+  imgURL: string
+) => {
   // make a product id via uuid
   const id = uuid();
 
@@ -72,6 +79,16 @@ export const addNewProduct = async (product: {}, imgURL: string) => {
     ...product,
     id,
     image: imgURL,
-    price: parseInt(product.price),
+    price: product.price,
+  });
+};
+
+export const getProducts = async (): Promise<ProductType[] | []> => {
+  return get(ref(database, 'products')).then((snapshot) => {
+    if (snapshot.exists()) {
+      // console.log(Object.values(snapshot.val()));
+      return Object.values(snapshot.val());
+    }
+    return [];
   });
 };

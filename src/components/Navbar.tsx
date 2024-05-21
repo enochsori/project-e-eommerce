@@ -18,7 +18,7 @@ export default function Navbar() {
       </Link>
 
       <nav className='flex items-center gap-6 font-semibold'>
-        <Link to='/all-items' className='hover:opacity-60'>
+        <Link to='/all-products' className='hover:opacity-60'>
           <span className='text-lg'>All Products</span>
         </Link>
 
