@@ -20,7 +20,7 @@ export default function ProductCard({
       <div>
         <div className='px-2 text-lg font-bold flex justify-between items-center'>
           <h3 className='truncate'>{name}</h3>
-          <p>{`$ ${price}`}</p>
+          <p>{`$${price}`}</p>
         </div>
         <p className='mb-2 px-2 text-gray-600'>{category}</p>
       </div>

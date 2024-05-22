@@ -1,14 +1,32 @@
-import React from 'react';
+import { useAuthContext } from '../../context/AuthContext';
 
 type Prop = {
   title: string;
   onClick: () => void;
+  disabled: boolean;
 };
-export default function Button({ title, onClick }: Prop) {
+
+export default function Button({ title, onClick, disabled }: Prop) {
+  const { user, setModal } = useAuthContext();
+
+  const handleOnClick = () => {
+    if (user) {
+      onClick();
+    } else {
+      setModal({
+        message:
+          '"Please log in so that we can know who our valued customers are."',
+        status: true,
+      });
+    }
+  };
+
   return (
     <button
-      className='bg-brand py-2 px-4 text-white rounded-sm hover:brightness-110'
-      onClick={onClick}
+      className={`bg-brand py-2 px-4 text-white rounded-sm ${
+        disabled ? ' cursor-not-allowed' : 'hover:brightness-110'
+      } `}
+      onClick={handleOnClick}
     >
       {title}
     </button>

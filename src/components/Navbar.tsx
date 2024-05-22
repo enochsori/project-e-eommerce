@@ -5,10 +5,11 @@ import { RiShoppingCartLine } from 'react-icons/ri';
 
 import UserComponent from './UserComponent';
 import { useAuthContext } from '../context/AuthContext';
+import Modal from './ui/Modal';
 
 export default function Navbar() {
   const navigate = useNavigate();
-  const { user, login, logout } = useAuthContext();
+  const { user, login, logout, modal } = useAuthContext();
 
   return (
     <header className='w-full flex justify-between items-center p-4 mb-4 text-2xl border-b border-gray-300'>
@@ -53,6 +54,7 @@ export default function Navbar() {
           {user ? 'Log out' : 'Log in'}
         </button>
       </nav>
+      {modal.status && <Modal />}
     </header>
   );
 }

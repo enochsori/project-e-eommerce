@@ -1,5 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import Button from '../components/ui/Button';
+import { useAuthContext } from '../context/AuthContext';
 
 export default function ProductDetail() {
   const {
@@ -11,6 +12,8 @@ export default function ProductDetail() {
   const handleOnClick = () => {
     console.log('saved it into your cart');
   };
+
+  const { user } = useAuthContext();
 
   return (
     <>
@@ -30,7 +33,11 @@ export default function ProductDetail() {
             $ {price}
           </p>
           <p className='py-4 text-lg'>{description}</p>
-          <Button title='Add to your cart' onClick={handleOnClick} />
+          <Button
+            title='Add to your cart'
+            onClick={handleOnClick}
+            disabled={user ? false : true}
+          />
         </div>
       </section>
     </>
