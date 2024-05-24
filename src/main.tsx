@@ -7,12 +7,12 @@ import './index.css';
 import App from './App.tsx';
 import Home from './pages/Home.tsx';
 import NotFound from './pages/NotFound.tsx';
-import Cart from './pages/Cart.tsx';
 import Category from './pages/Category.tsx';
 import ProtectedRoute from './pages/ProtectedRoute.tsx';
 import NewProduct from './pages/NewProduct.tsx';
 import AllProducts from './pages/AllProducts.tsx';
 import ProductDetail from './pages/ProductDetail.tsx';
+import MyCart from './pages/MyCart.tsx';
 
 const router = createBrowserRouter([
   {
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/cart',
-        element: <Cart />,
+        element: <MyCart />,
       },
       {
         path: '/:category',

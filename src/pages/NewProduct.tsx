@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { uploadImage } from '../apis/uploader';
 import { addNewProduct } from '../apis/firebase';
 import { NewProductFormData } from '../service/types/type';
+import { useMutation } from '@tanstack/react-query';
 
 export default function NewProduct() {
   const { register, handleSubmit, reset } = useForm<NewProductFormData>();

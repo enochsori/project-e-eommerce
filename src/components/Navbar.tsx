@@ -6,11 +6,10 @@ import { RiShoppingCartLine } from 'react-icons/ri';
 import UserComponent from './UserComponent';
 import { useAuthContext } from '../context/AuthContext';
 import Modal from './ui/Modal';
+import CartStatus from './ui/CartStatus';
 
 export default function Navbar() {
-  const navigate = useNavigate();
   const { user, login, logout, modal } = useAuthContext();
-
   return (
     <header className='w-full flex justify-between items-center p-4 mb-4 text-2xl border-b border-gray-300'>
       <Link to='/' className='flex hover:opacity-80'>
@@ -32,16 +31,7 @@ export default function Navbar() {
         {user && (
           <div className='flex'>
             <UserComponent user={user} />
-            <div className='relative mr-4 flex justify-center items-center ml-2'>
-              <p className='bg-red-500 h-5 w-5 rounded-full text-center text-sm font-bold absolute top-0 left-3 opacity-80'>
-                1
-              </p>
-
-              <RiShoppingCartLine
-                className='text-2xl hover:opacity-80 hover:cursor-pointer'
-                onClick={() => navigate('/cart')}
-              />
-            </div>
+            <CartStatus />
           </div>
         )}
 

@@ -23,7 +23,7 @@ export default function Button({ title, onClick, disabled }: Prop) {
 
   return (
     <button
-      className={`bg-brand py-2 px-4 text-white rounded-sm ${
+      className={`bg-brand py-2 px-4 text-white rounded-lg ${
         disabled ? ' cursor-not-allowed' : 'hover:brightness-110'
       } `}
       onClick={handleOnClick}

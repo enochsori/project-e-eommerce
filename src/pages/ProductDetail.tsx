@@ -1,19 +1,22 @@
 import { useLocation } from 'react-router-dom';
 import Button from '../components/ui/Button';
 import { useAuthContext } from '../context/AuthContext';
+import { addOrUpdateCart } from '../apis/firebase';
 
 export default function ProductDetail() {
+  const { user } = useAuthContext();
+
   const {
     state: {
       product: { id, image, price, description, name, category },
     },
   } = useLocation();
 
-  const handleOnClick = () => {
-    console.log('saved it into your cart');
+  const handleAddProduct = () => {
+    // add the product into the carts
+    const product = { id, image, name, price, quantity: 1 };
+    if (user) addOrUpdateCart(user.uid, product);
   };
-
-  const { user } = useAuthContext();
 
   return (
     <>
@@ -35,7 +38,7 @@ export default function ProductDetail() {
           <p className='py-4 text-lg'>{description}</p>
           <Button
             title='Add to your cart'
-            onClick={handleOnClick}
+            onClick={handleAddProduct}
             disabled={user ? false : true}
           />
         </div>

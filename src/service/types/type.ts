@@ -33,3 +33,13 @@ export type ProductType = NewProductFormData & {
   id: string;
   image: string;
 };
+
+export type UpdateCartProduct = {
+  id: string;
+  image: string;
+  price: number;
+  quantity: number;
+  name: string;
+};
+
+export const SHIPPING = 20;

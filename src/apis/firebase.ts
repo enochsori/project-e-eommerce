@@ -6,7 +6,7 @@ import {
   signOut,
   onAuthStateChanged,
 } from 'firebase/auth';
-import { getDatabase, ref, get, set } from 'firebase/database';
+import { getDatabase, ref, get, set, remove } from 'firebase/database';
 
 import { v4 as uuid } from 'uuid';
 
@@ -21,6 +21,7 @@ import {
   ExtendedUser,
   NewProductFormData,
   ProductType,
+  UpdateCartProduct,
 } from '../service/types/type';
 
 // Initialize Firebase
@@ -83,12 +84,34 @@ export const addNewProduct = async (
   });
 };
 
+// to get products
 export const getProducts = async (): Promise<ProductType[] | []> => {
   return get(ref(database, 'products')).then((snapshot) => {
     if (snapshot.exists()) {
-      // console.log(Object.values(snapshot.val()));
       return Object.values(snapshot.val());
     }
     return [];
   });
+};
+
+// to get carts info based on user id
+export const getCart = async (userId: string) => {
+  return get(ref(database, `carts/${userId}`)) //
+    .then((snapshot) => {
+      const items = snapshot.val() || {};
+      return Object.values(items as UpdateCartProduct[]);
+    });
+};
+
+// add or update cart based on user id and product
+export const addOrUpdateCart = async (
+  userId: string,
+  product: UpdateCartProduct
+) => {
+  return set(ref(database, `carts/${userId}/${product.id}`), product);
+};
+
+// remove product from cart
+export const removeFromCart = async (userId: string, productId: string) => {
+  return remove(ref(database, `carts/${userId}/${productId}`));
 };
