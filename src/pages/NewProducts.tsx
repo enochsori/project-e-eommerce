@@ -34,7 +34,7 @@ export default function NewProduct() {
       uploadImage(file) //
         .then((url) => {
           addProduct.mutate(
-            { product, url },
+            { data, url },
             {
               onSuccess: () => {
                 setSuccess(

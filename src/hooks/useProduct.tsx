@@ -10,7 +10,9 @@ export default function useProducts() {
   });
 
   const addProduct = useMutation({
-    mutationFn: ({ product, url }) => addNewProduct(product, url),
+    mutationFn: ({ data, url }) => {
+      return addNewProduct(data, url);
+    },
     onSuccess: () => queryClient.invalidateQueries(['products']),
   });
 

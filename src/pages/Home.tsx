@@ -14,7 +14,7 @@ export default function Home() {
         ))}
       </ul>
 
-      <h1 className='text-4xl font-bold text-center mt-6 mb-4'>Products</h1>
+      <h1 className='text-4xl font-bold text-center mt-6 mb-4'>All products</h1>
       <Product />
     </main>
 

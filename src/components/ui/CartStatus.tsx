@@ -10,8 +10,6 @@ export default function CartStatus() {
     cartQuery: { data: products },
   } = useCart();
 
-  useEffect(() => console.log(products), [products]);
-
   return (
     <div className='mx-2 relative'>
       <RiShoppingCartLine
