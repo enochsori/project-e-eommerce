@@ -9,6 +9,16 @@ type Categories =
   | 'Microphone'
   | undefined;
 
+export const ItemCategoryMapping = {
+  'Acoustic Guitar': 'acoustic-guitar',
+  'Bass Guitar': 'bass-guitar',
+  'Electric Guitar': 'elec-guitar',
+  Piano: 'piano',
+  Drum: 'drum',
+  Microphone: 'microphone',
+  undefined: undefined,
+};
+
 export type Item = {
   item: Categories;
   categoryId: string | undefined;
