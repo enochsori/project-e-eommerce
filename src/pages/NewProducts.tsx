@@ -1,15 +1,16 @@
 import { ChangeEvent, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { uploadImage } from '../apis/uploader';
-import { addNewProduct } from '../apis/firebase';
 import { NewProductFormData } from '../service/types/type';
-import { useMutation } from '@tanstack/react-query';
+import useProducts from '../hooks/useProduct';
 
 export default function NewProduct() {
   const { register, handleSubmit, reset } = useForm<NewProductFormData>();
   const [file, setFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const [success, setSuccess] = useState<string | null>(null);
+
+  const { addProduct } = useProducts();
 
   const categoryOptions = [
     'acoustic-guitar',
@@ -32,21 +33,22 @@ export default function NewProduct() {
     file &&
       uploadImage(file) //
         .then((url) => {
-          // 2. call a function to upload new product into the firebase realtime database
-          addNewProduct(data, url) //
-            .then(() => {
-              // set file uploading success message for UI
-              setSuccess(
-                `The new product - ${data.name} is successfully registered!`
-              );
-              setTimeout(() => {
-                setSuccess(null);
-              }, 4000);
-
-              // reset input fields using react form hook FN
-              reset();
-              setFile(null);
-            });
+          addProduct.mutate(
+            { product, url },
+            {
+              onSuccess: () => {
+                setSuccess(
+                  `The new product - ${data.name} is successfully registered!`
+                );
+                setTimeout(() => {
+                  setSuccess(null);
+                }, 4000);
+                // reset input fields using react form hook FN
+                reset();
+                setFile(null);
+              },
+            }
+          );
         }) // finally reset uploading status as false
         .finally(() => setIsUploading(false));
   };

@@ -1,19 +1,16 @@
-import { useQuery } from '@tanstack/react-query';
 import { RiShoppingCartLine } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
-import { getCart } from '../../apis/firebase';
-import { useAuthContext } from '../../context/AuthContext';
+import useCart from '../../hooks/useCart';
+import { useEffect } from 'react';
 
 export default function CartStatus() {
   const navigate = useNavigate();
-  const {
-    user: { uid },
-  } = useAuthContext();
 
-  const { data: products } = useQuery({
-    queryKey: ['carts'],
-    queryFn: () => getCart(uid),
-  });
+  const {
+    cartQuery: { data: products },
+  } = useCart();
+
+  useEffect(() => console.log(products), [products]);
 
   return (
     <div className='mx-2 relative'>

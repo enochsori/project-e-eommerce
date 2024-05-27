@@ -1,24 +1,16 @@
-import { useQuery } from '@tanstack/react-query';
-import { getCart } from '../apis/firebase';
-import { useAuthContext } from '../context/AuthContext';
 import CartItem from '../components/ui/CartItem';
 import PriceCard from '../components/ui/PriceCard';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import { SHIPPING } from '../service/types/type';
 import { FaEquals } from 'react-icons/fa';
 import Button from '../components/ui/Button';
+import useCart from '../hooks/useCart';
 
 export default function MyCart() {
   const {
-    user: { uid },
-  } = useAuthContext();
-
-  const { data: products, isLoading } = useQuery({
-    queryKey: ['carts'],
-    queryFn: () => getCart(uid),
-  });
-
-  console.log(products);
+    cartQuery: { data: products, isLoading },
+    removeItem,
+  } = useCart();
 
   if (isLoading) return <p>Loading...</p>;
 
@@ -31,6 +23,7 @@ export default function MyCart() {
 
   const handleOrder = () => {
     console.log('Thank You');
+    products?.forEach((product) => removeItem.mutate(product.id));
   };
 
   return (
@@ -38,13 +31,15 @@ export default function MyCart() {
       <p className='text-2xl text-center font-bold border-b border-gray-300 pb-4 mb-8'>
         My cart
       </p>
-      {!hasProducts && <p>Your cart is empty now</p>}
+      {!hasProducts && (
+        <p className='text-3xl font-bold'>Your cart is empty now..</p>
+      )}
       {hasProducts && (
         <>
           <ul className='border-b border-gray-300 pb-4 mb-8 p-4 px-8'>
             {products &&
               products.map((product) => (
-                <CartItem key={product.id} product={product} uid={uid} />
+                <CartItem key={product.id} product={product} />
               ))}
           </ul>
           <div className='flex justify-between items-center p-2 md:px-8 mb-16'>

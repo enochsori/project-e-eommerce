@@ -41,7 +41,6 @@ export default function AuthContextProvider({ children }: ContextProviderPops) {
 
   useEffect(() => {
     onUserStateChange((user) => {
-      // console.log(user);
       setUser(user);
     });
   }, []);

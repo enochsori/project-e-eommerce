@@ -9,7 +9,7 @@ import Home from './pages/Home.tsx';
 import NotFound from './pages/NotFound.tsx';
 import Category from './pages/Category.tsx';
 import ProtectedRoute from './pages/ProtectedRoute.tsx';
-import NewProduct from './pages/NewProduct.tsx';
+import NewProduct from './pages/NewProducts.tsx';
 import AllProducts from './pages/AllProducts.tsx';
 import ProductDetail from './pages/ProductDetail.tsx';
 import MyCart from './pages/MyCart.tsx';
