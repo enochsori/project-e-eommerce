@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { uploadImage } from '../apis/uploader';
-import { NewProductFormData } from '../service/types/type';
+import { NewProductFormData, ProductType } from '../service/types/type';
 import useProducts from '../hooks/useProduct';
 
 export default function NewProduct() {
@@ -26,7 +26,7 @@ export default function NewProduct() {
   };
 
   const onSubmit: SubmitHandler<NewProductFormData> = async (
-    data: NewProductFormData
+    data: NewProductFormData | ProductType
   ) => {
     // 1. image - upload into cloud and get url where the image saved in
 

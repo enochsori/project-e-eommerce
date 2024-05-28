@@ -55,6 +55,6 @@ export type UpdateCartProduct = {
 export const SHIPPING = 20;
 
 export type UseProductHookProps = {
-  data: ProductType;
+  data: ProductType | NewProductFormData;
   url: string;
 };
