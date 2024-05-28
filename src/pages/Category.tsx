@@ -1,14 +1,25 @@
 import { useLocation } from 'react-router-dom';
 import useProducts from '../hooks/useProduct';
-import { ItemCategoryMapping, ProductType } from '../service/types/type';
+import {
+  Categories,
+  ItemCategoryMapping,
+  ProductType,
+} from '../service/types/type';
 import ProductCard from '../components/ui/ProductCard';
+
+type LocationState = {
+  category: {
+    item: Categories;
+    imageSrc: string;
+  };
+};
 
 export default function Category() {
   const {
     state: {
       category: { item, imageSrc },
     },
-  } = useLocation();
+  }: { state: LocationState } = useLocation();
 
   const {
     productsQuery: { isLoading, error, data: products },

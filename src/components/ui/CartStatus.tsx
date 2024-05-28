@@ -1,7 +1,6 @@
 import { RiShoppingCartLine } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import useCart from '../../hooks/useCart';
-import { useEffect } from 'react';
 
 export default function CartStatus() {
   const navigate = useNavigate();

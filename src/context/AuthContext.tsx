@@ -19,6 +19,7 @@ type ModalType = {
 
 type AuthContextValue = {
   user: ExtendedUser | null;
+  uid: string | null;
   login: () => void;
   logout: () => void;
   modal: ModalType;
@@ -27,6 +28,7 @@ type AuthContextValue = {
 
 const contextInitialValue = {
   user: null,
+  uid: null,
   login,
   logout,
   modal: { message: '', status: false },
@@ -46,7 +48,16 @@ export default function AuthContextProvider({ children }: ContextProviderPops) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, modal, setModal }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        login,
+        logout,
+        modal,
+        setModal,
+        uid: user ? user.uid : null,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

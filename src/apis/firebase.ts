@@ -8,7 +8,7 @@ import {
 } from 'firebase/auth';
 import { getDatabase, ref, get, set, remove } from 'firebase/database';
 
-import { v4 as uuid } from 'uuid';
+import { v4 } from 'uuid';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -65,7 +65,10 @@ const adminUser = async (user: User): Promise<ExtendedUser> => {
       // if there's error or problem return just user
       return user;
     })
-    .catch(console.error);
+    .catch((error) => {
+      console.log(error);
+      return user;
+    });
 };
 
 export const addNewProduct = async (
@@ -73,7 +76,7 @@ export const addNewProduct = async (
   imgURL: string
 ) => {
   // make a product id via uuid
-  const id = uuid();
+  const id = v4();
 
   // upload a new product into the firebase database
   set(ref(database, `products/${id}`), {
@@ -95,7 +98,7 @@ export const getProducts = async (): Promise<ProductType[] | []> => {
 };
 
 // to get carts info based on user id
-export const getCart = async (userId: string) => {
+export const getCart = async (userId: string | null) => {
   return get(ref(database, `carts/${userId}`)) //
     .then((snapshot) => {
       const items = snapshot.val() || {};
@@ -105,13 +108,16 @@ export const getCart = async (userId: string) => {
 
 // add or update cart based on user id and product
 export const addOrUpdateCart = async (
-  userId: string,
+  userId: string | null,
   product: UpdateCartProduct
 ) => {
   return set(ref(database, `carts/${userId}/${product.id}`), product);
 };
 
 // remove product from cart
-export const removeFromCart = async (userId: string, productId: string) => {
+export const removeFromCart = async (
+  userId: string | null,
+  productId: string
+) => {
   return remove(ref(database, `carts/${userId}/${productId}`));
 };

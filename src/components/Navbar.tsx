@@ -1,7 +1,5 @@
-import { Link, useNavigate } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 import { GrUserAdmin } from 'react-icons/gr';
-import { RiShoppingCartLine } from 'react-icons/ri';
 
 import UserComponent from './UserComponent';
 import { useAuthContext } from '../context/AuthContext';

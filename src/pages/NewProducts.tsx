@@ -29,6 +29,7 @@ export default function NewProduct() {
     data: NewProductFormData
   ) => {
     // 1. image - upload into cloud and get url where the image saved in
+
     setIsUploading(true);
     file &&
       uploadImage(file) //

@@ -26,13 +26,13 @@ export const itemCategories: ItemCategories = {
     imageSrc: '/images/categories/drums.webp',
     categoryId: 'drum',
   },
-  migrophone: {
+  microphone: {
     item: 'Microphone',
     imageSrc: '/images/categories/microphones.webp',
     categoryId: 'microphone',
   },
   empty: {
-    item: undefined,
+    item: 'undefined',
     imageSrc: '/images/categories/not-yet.webp',
     categoryId: undefined,
   },

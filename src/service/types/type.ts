@@ -1,13 +1,13 @@
 import { User } from 'firebase/auth';
 
-type Categories =
+export type Categories =
   | 'Acoustic Guitar'
   | 'Bass Guitar'
   | 'Electric Guitar'
   | 'Piano'
   | 'Drum'
   | 'Microphone'
-  | undefined;
+  | 'undefined';
 
 export const ItemCategoryMapping = {
   'Acoustic Guitar': 'acoustic-guitar',
@@ -28,7 +28,7 @@ export type Item = {
 export type ItemCategories = { [key: string]: Item };
 
 export interface ExtendedUser extends User {
-  isAdmin?: string;
+  isAdmin?: boolean;
 }
 
 export type NewProductFormData = {
@@ -53,3 +53,8 @@ export type UpdateCartProduct = {
 };
 
 export const SHIPPING = 20;
+
+export type UseProductHookProps = {
+  data: ProductType;
+  url: string;
+};
