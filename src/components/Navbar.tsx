@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import { GrUserAdmin } from 'react-icons/gr';
-
-import UserComponent from './UserComponent';
 import { useAuthContext } from '../context/AuthContext';
+import UserComponent from './UserComponent';
 import Modal from './ui/Modal';
 import CartStatus from './ui/CartStatus';
+import { ImGithub } from 'react-icons/im';
+import { GrUserAdmin } from 'react-icons/gr';
 
 export default function Navbar() {
   const { user, login, logout, modal } = useAuthContext();
@@ -41,6 +41,12 @@ export default function Navbar() {
         >
           {user ? 'Log out' : 'Log in'}
         </button>
+        <a
+          href='https://github.com/enochsori/project-e-eommerce'
+          target='_black'
+        >
+          <ImGithub />
+        </a>
       </nav>
       {modal.status && <Modal />}
     </header>
